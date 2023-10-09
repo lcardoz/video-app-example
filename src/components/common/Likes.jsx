@@ -1,17 +1,17 @@
 import React from 'react';
 
-// Input- liked: boolean
-// Output- onClick
-
-const Likes = ({liked}) => {
+const Likes = ({ liked, onClick }) => {
 
   let classes = "fa fa-heart";
-  if (!liked) classes += "-o"
+  if (!liked) classes += "-o";
 
   return (
-    <>
-      <i className={classes} aria-hidden="true" />
-    </>
+    <i 
+      onClick={onClick} 
+      style={{cursor: 'pointer'}}
+      className={classes} 
+      aria-hidden="true" 
+    />
   )
 }
 

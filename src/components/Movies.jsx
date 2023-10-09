@@ -9,8 +9,16 @@ const Movies = () => {
   })
 
   const handleDelete = (movie) => {
-    const movies = data.movies.filter(m => m._id !== movie._id)
-    setData({movies})
+    const movies = data.movies.filter(m => m._id !== movie._id);
+    setData({ movies });
+  }
+
+  const handleLike = (movie) => {
+    const movies = [...data.movies];
+    const index = movies.indexOf(movie);
+    movies[index] = {...movies[index]};
+    movies[index].liked = !movies[index].liked;
+    setData({ movies });
   }
 
   const movieData = data.movies.map(movie => 
@@ -20,7 +28,10 @@ const Movies = () => {
       <td>{movie.numberInStock}</td>
       <td>{movie.dailyRentalRate}</td>
       <td>
-        <Likes liked={movie.liked} />
+        <Likes 
+          liked={movie.liked}
+          onClick={() => handleLike(movie)} 
+        />
       </td>
       <td>
         <button 
