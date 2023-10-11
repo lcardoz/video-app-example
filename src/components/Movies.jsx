@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import Likes from './common/Likes';
+import Pagination from './common/Pagination';
 import { getMovies } from '../services/fakeMovieService';
 
 const Movies = () => {
 
   const [data, setData] = useState({
     movies: getMovies(),
+    pageSize: 4,
   })
+
+  const count = data.movies.length;
 
   const handleDelete = (movie) => {
     const movies = data.movies.filter(m => m._id !== movie._id);
@@ -19,6 +23,10 @@ const Movies = () => {
     movies[index] = {...movies[index]};
     movies[index].liked = !movies[index].liked;
     setData({ movies });
+  }
+
+  const handlePageChange = (page) => {
+    console.log(page)
   }
 
   const movieData = data.movies.map(movie => 
@@ -66,6 +74,11 @@ const Movies = () => {
               {movieData}
             </tbody>
           </table>
+          <Pagination 
+            itemsCount={count} 
+            pageSize={data.movies.pageSize} 
+            onPageChange={handlePageChange} 
+          />
         </>
       }
     </div>
