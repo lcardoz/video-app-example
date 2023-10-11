@@ -8,4 +8,4 @@ export function paginate(itemsArray, pageNumber, pageSize) {
     .slice(startIndex)
     .take(pageSize)
     .value();
-}
+} 
