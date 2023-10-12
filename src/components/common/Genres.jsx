@@ -13,9 +13,9 @@ const Genres = ({ genres, onGenreSelect, selectedGenre, handleAllGenres }) => {
         </li>
         {genres.map(genre => (
           <li 
-          key={genre._id} 
-          className={genre === selectedGenre ? "list-group-item active" : "list-group-item"}
-          onClick={() => onGenreSelect(genre)}
+            key={genre._id} 
+            className={genre === selectedGenre ? "list-group-item active" : "list-group-item"}
+            onClick={() => onGenreSelect(genre)}
           >
           {genre.name}
         </li>
