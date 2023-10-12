@@ -1,16 +1,21 @@
 import React from 'react';
 
-const Genres = ({ genres, onGenreClick }) => {
+const Genres = ({ genres, onGenreSelect, selectedGenre, handleAllGenres }) => {
   
   return (
     <>
       <ul className="list-group">
-        <li className="list-group-item">All Genres</li>
+        <li 
+          className={"All Genres" === selectedGenre ? "list-group-item active" : "list-group-item"}
+          onClick={handleAllGenres}
+        >
+          All Genres
+        </li>
         {genres.map(genre => (
           <li 
           key={genre._id} 
-          className="list-group-item"
-          onClick={() => onGenreClick(genre.name)}
+          className={genre === selectedGenre ? "list-group-item active" : "list-group-item"}
+          onClick={() => onGenreSelect(genre)}
           >
           {genre.name}
         </li>

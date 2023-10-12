@@ -13,9 +13,10 @@ const Movies = () => {
     genres: getGenres(),
     currentPage: 1,
     pageSize: 4,
+    selectedGenre: 'All Genres',
   })
 
-  const {movies, genres, currentPage, pageSize} = data;
+  const {movies, genres, currentPage, pageSize, selectedGenre } = data;
   const count = movies.length;
 
   const handleDelete = (movie) => {
@@ -35,11 +36,17 @@ const Movies = () => {
     setData({...data, currentPage: page })
   }
 
-  const handleGenreClick = genre => {
-    console.log(genre)
+  const handleGenreSelect = genre => {
+    setData({...data, selectedGenre: genre, currentPage: 1})
   }
 
-  const paginatedMovies = paginate(movies, currentPage, pageSize);
+  const handleAllGenres = () => {
+    setData({...data, selectedGenre: 'All Genres', currentPage: 1})
+  }
+
+  const filteredMovies = selectedGenre && selectedGenre._id ? movies.filter(m => m.genre._id === selectedGenre._id) : movies
+
+  const paginatedMovies = paginate(filteredMovies, currentPage, pageSize);
 
   return (
     <div style={{marginTop: 20, marginBottom: 20}}>
@@ -50,11 +57,13 @@ const Movies = () => {
           <div className="col-3">
             <Genres 
               genres={genres} 
-              onGenreClick={handleGenreClick}
+              selectedGenre={selectedGenre}
+              handleAllGenres={handleAllGenres}
+              onGenreSelect={handleGenreSelect}
             />
           </div>
           <div className="col">
-            <p>Showing {count} movies in the database.</p>
+            <p>Showing {filteredMovies.length} movies in the database.</p>
             <table className='table'>
               <thead>
                 <tr>
@@ -92,7 +101,7 @@ const Movies = () => {
               </tbody>
             </table>
             <Pagination 
-              itemsCount={count} 
+              itemsCount={filteredMovies.length} 
               pageSize={pageSize} 
               currentPage={currentPage}
               onPageChange={handlePageChange} 
