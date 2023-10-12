@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Likes from './common/Likes';
 import Pagination from './common/Pagination';
+import Genres from './common/Genres';
 import { getMovies } from '../services/fakeMovieService';
 import { paginate } from '../utils/paginate';
 
@@ -40,6 +41,7 @@ const Movies = () => {
         <p>There are no movies in the database. </p>
       : 
         <>
+          <Genres />
           <p>Showing {count} movies in the database.</p>
           <table className='table'>
             <thead>
