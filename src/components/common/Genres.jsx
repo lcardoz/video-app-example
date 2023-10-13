@@ -4,7 +4,7 @@ const Genres = ({ genres, onGenreSelect, selectedGenre, handleAllGenres }) => {
   
   return (
     <>
-      <ul className="list-group">
+      <ul className="list-group" style={{cursor: "pointer"}}>
         <li 
           className={"All Genres" === selectedGenre ? "list-group-item active" : "list-group-item"}
           onClick={handleAllGenres}
