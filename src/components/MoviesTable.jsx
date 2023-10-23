@@ -1,6 +1,5 @@
 import React from 'react';
-import TableHeader from './common/TableHeader';
-import TableBody from './common/TableBody';
+import Table from './common/Table';
 import Likes from './common/Likes';
 
 const MoviesTable = ({ movies, onDelete, onLike, onSort, sortColumn }) => {
@@ -15,23 +14,16 @@ const MoviesTable = ({ movies, onDelete, onLike, onSort, sortColumn }) => {
     )},
     {key: 'delete', content: movie => (
       <button className="btn btn-danger btn-sm" onClick={() => onDelete(movie)}>Delete</button>
-    )},
+    )}, 
   ]
 
   return (
-    <>
-      <table className='table'> 
-        <TableHeader 
-          columns={columns} 
-          sortColumn={sortColumn} 
-          onSort={onSort} 
-        />
-        <TableBody 
-          data={movies} 
-          columns={columns} 
-        />
-      </table>
-    </>
+    <Table 
+      columns={columns} 
+      data={movies} 
+      sortColumn={sortColumn} 
+      onSort={onSort}
+    />
   )
 }
 
